@@ -1,0 +1,176 @@
+{
+  "n_samples": 5000,
+  "flood_ratio": 0.1224,
+  "preprocessing": {
+    "train_shape": [
+      6144,
+      20
+    ],
+    "val_shape": [
+      750,
+      20
+    ],
+    "test_shape": [
+      750,
+      20
+    ],
+    "n_features": 20,
+    "smote_applied": true,
+    "original_class_dist": {
+      "0": 3072,
+      "1": 428
+    },
+    "resampled_class_dist": {
+      "0": 3072,
+      "1": 3072
+    }
+  },
+  "xgboost": {
+    "accuracy": 0.8773,
+    "f1": 0.4773,
+    "precision": 0.5,
+    "recall": 0.4565,
+    "roc_auc": 0.8198,
+    "cv_mean": null,
+    "cv_std": null,
+    "n_trees": 600,
+    "cv_scores": [
+      0.9785289844944495,
+      0.9748865989860616,
+      0.9754731924661914,
+      0.9730992888877594,
+      0.971822292734245
+    ],
+    "feature_importance": {
+      "monsoon_flag": 0.20558,
+      "rain_24hr": 0.154189,
+      "rain_6hr": 0.142439,
+      "flood_compound": 0.059378,
+      "elevation": 0.050921,
+      "rain_3hr": 0.042935,
+      "rain_x_soil": 0.034498,
+      "urbanization": 0.029677,
+      "drainage_capacity": 0.029053,
+      "soil_moisture": 0.028084
+    }
+  },
+  "lstm": {
+    "accuracy": 0.5211,
+    "f1": 0.4821,
+    "roc_auc": 0.5241,
+    "val_loss": 0.0,
+    "epochs_trained": 0,
+    "using_fallback": true
+  },
+  "ensemble": {
+    "optimal_alpha": 1.0,
+    "blend_auc": 0.8198427382053654
+  },
+  "test": {
+    "accuracy": 0.9118,
+    "f1": 0.6512,
+    "roc_auc": 0.9009
+  },
+  "drift_baseline": {
+    "rain_1hr": {
+      "psi": 0.259096,
+      "drifted": true,
+      "severity": "significant"
+    },
+    "rain_3hr": {
+      "psi": 0.265863,
+      "drifted": true,
+      "severity": "significant"
+    },
+    "rain_6hr": {
+      "psi": 0.246499,
+      "drifted": false,
+      "severity": "moderate"
+    },
+    "rain_24hr": {
+      "psi": 0.236979,
+      "drifted": false,
+      "severity": "moderate"
+    },
+    "elevation": {
+      "psi": 0.049598,
+      "drifted": false,
+      "severity": "none"
+    },
+    "soil_moisture": {
+      "psi": 0.035855,
+      "drifted": false,
+      "severity": "none"
+    },
+    "drainage_capacity": {
+      "psi": 0.023649,
+      "drifted": false,
+      "severity": "none"
+    },
+    "urbanization": {
+      "psi": 0.03479,
+      "drifted": false,
+      "severity": "none"
+    },
+    "rain_x_soil": {
+      "psi": 0.217086,
+      "drifted": false,
+      "severity": "moderate"
+    },
+    "wind_x_pressure_deficit": {
+      "psi": 0.013214,
+      "drifted": false,
+      "severity": "none"
+    },
+    "flood_compound": {
+      "psi": 0.203185,
+      "drifted": false,
+      "severity": "moderate"
+    },
+    "pressure_drop_3hr": {
+      "psi": 0.006247,
+      "drifted": false,
+      "severity": "none"
+    },
+    "pressure_drop_6hr": {
+      "psi": 0.013943,
+      "drifted": false,
+      "severity": "none"
+    },
+    "rain_intensity_ratio": {
+      "psi": 0.028083,
+      "drifted": false,
+      "severity": "none"
+    },
+    "temperature_2m": {
+      "psi": 0.033441,
+      "drifted": false,
+      "severity": "none"
+    },
+    "wind_speed_10m": {
+      "psi": 0.057182,
+      "drifted": false,
+      "severity": "none"
+    },
+    "surface_pressure": {
+      "psi": 0.01671,
+      "drifted": false,
+      "severity": "none"
+    },
+    "relative_humidity": {
+      "psi": 0.009123,
+      "drifted": false,
+      "severity": "none"
+    },
+    "cloud_cover": {
+      "psi": 0.022916,
+      "drifted": false,
+      "severity": "none"
+    },
+    "monsoon_flag": {
+      "psi": 0.76679,
+      "drifted": true,
+      "severity": "significant"
+    }
+  }
+}

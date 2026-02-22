@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Dark theme defaults ── */
+:root {
+  --color-surface-0: #0A0A0F;
+  --color-surface-1: #111118;
+  --color-surface-2: #1A1A24;
+  --color-surface-3: #242430;
+  --color-accent: #3B82F6;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-surface-0 text-gray-100 antialiased;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* ── Leaflet dark theme overrides ── */
+.leaflet-container {
+  background: #0A0A0F !important;
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.7) contrast(1.1) saturate(0.8) hue-rotate(180deg) invert(1);
+}
+
+.leaflet-control-zoom a {
+  @apply bg-surface-2 text-gray-100 border-surface-3 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply bg-surface-2 text-gray-100 rounded-lg shadow-xl !important;
+}
+
+.leaflet-popup-tip {
+  @apply bg-surface-2 !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-surface-0;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-surface-3 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-surface-4;
+}
+
+/* ── Risk gauge arc ── */
+.risk-gauge-arc {
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Grid overlay cell ── */
+.grid-cell {
+  transition: fill-opacity 0.3s ease, stroke-opacity 0.3s ease;
+}
+
+.grid-cell:hover {
+  stroke-opacity: 1;
+  fill-opacity: 0.8;
+}
+
+/* ── Alert banner ── */
+@keyframes alert-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.alert-scroll {
+  animation: alert-scroll 15s linear infinite;
+}
