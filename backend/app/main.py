@@ -31,6 +31,7 @@ from backend.app.api.v1.cyclone import router as cyclone_router
 from backend.app.api.v1.risk import router as risk_router
 from backend.app.api.v1.alerts import router as alert_router
 from backend.app.api.v1.assess import router as assess_router  # Full pipeline endpoint
+from backend.app.api.v1.calendar_api import router as calendar_router  # Calendar system
 
 # ── Initialise logging ──
 setup_logging()
@@ -99,6 +100,7 @@ app.include_router(cyclone_router)
 app.include_router(risk_router)
 app.include_router(alert_router)
 app.include_router(assess_router)  # Full pipeline risk assessment
+app.include_router(calendar_router)  # Calendar-based weather/flood prediction
 
 
 # ── Root & health endpoints ──

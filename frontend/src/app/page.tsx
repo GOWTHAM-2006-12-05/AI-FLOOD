@@ -9,6 +9,7 @@ import { FeatureImportancePanel } from "@/components/FeatureImportancePanel";
 import { ModelConfidencePanel } from "@/components/ModelConfidencePanel";
 import { ForecastTimeSlider } from "@/components/ForecastTimeSlider";
 import { LocationSearch } from "@/components/LocationSearch";
+import CalendarView from "@/components/CalendarView";
 import { apiClient, type RiskData, type ForecastHorizon } from "@/lib/api";
 
 // Leaflet must be loaded client-side only (no SSR)
@@ -21,8 +22,11 @@ const DisasterMap = dynamic(() => import("@/components/DisasterMap"), {
   ),
 });
 
+type ViewMode = "dashboard" | "calendar";
+
 export default function DashboardPage() {
   // ── State ──
+  const [viewMode, setViewMode] = useState<ViewMode>("dashboard");
   const [location, setLocation] = useState<{ lat: number; lng: number }>({
     lat: 13.0827,
     lng: 80.2707,
@@ -74,10 +78,56 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      {/* ── Alert Banner (top) ── */}
-      {alerts.length > 0 && riskData && (
-        <AlertBanner
-          alerts={alerts}
+      {/* ── View Mode Tabs ── */}
+      <div className="bg-surface-1 border-b border-surface-3 px-4 py-2 flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-bold text-white">AI Disaster Prediction</span>
+          <span className="text-xs text-gray-500">v2.0</span>
+        </div>
+        <div className="flex gap-1 ml-6 bg-surface-2 rounded-lg p-1">
+          <button
+            onClick={() => setViewMode("dashboard")}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              viewMode === "dashboard"
+                ? "bg-accent-blue text-white shadow"
+                : "text-gray-400 hover:text-white hover:bg-surface-3"
+            }`}
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={() => setViewMode("calendar")}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              viewMode === "calendar"
+                ? "bg-accent-blue text-white shadow"
+                : "text-gray-400 hover:text-white hover:bg-surface-3"
+            }`}
+          >
+            Calendar History
+          </button>
+        </div>
+        <div className="ml-auto text-xs text-gray-500">
+          Location: {location.lat.toFixed(4)}°N, {location.lng.toFixed(4)}°E
+        </div>
+      </div>
+
+      {/* ── Calendar View ── */}
+      {viewMode === "calendar" && (
+        <div className="flex-1 overflow-auto bg-gray-900 p-6">
+          <CalendarView
+            latitude={location.lat}
+            longitude={location.lng}
+          />
+        </div>
+      )}
+
+      {/* ── Dashboard View ── */}
+      {viewMode === "dashboard" && (
+        <>
+          {/* ── Alert Banner (top) ── */}
+          {alerts.length > 0 && riskData && (
+            <AlertBanner
+              alerts={alerts}
           riskLevel={riskData.overall_risk_level}
           onDismiss={() => setAlerts([])}
         />
@@ -192,6 +242,8 @@ export default function DashboardPage() {
           )}
         </aside>
       </div>
+      </>
+      )}
     </div>
   );
 }
